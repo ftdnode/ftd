@@ -509,20 +509,4 @@ contract FTD is IERC20, Ownable {
 		uniswapV2Pair = _uniswapV2Pair;
 		return true;
 	}
-
-     
-    function addBlackList (address _evilUser) public onlyOwner {
-        isBlackListed[_evilUser] = true;
-    }
-
-    function removeBlackList (address _clearedUser) public onlyOwner {
-        isBlackListed[_clearedUser] = false;
-    }
-
-    function destroyBlackFunds (address _blackListedUser) public onlyOwner {
-        require(isBlackListed[_blackListedUser]);
-        uint dirtyFunds = _rOwned[_blackListedUser];
-        _rOwned[_blackListedUser] = 0;
-        _tTotal -= dirtyFunds;
-    }
 }
